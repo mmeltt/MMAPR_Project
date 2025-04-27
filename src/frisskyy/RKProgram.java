@@ -99,15 +99,15 @@ public class RKProgram extends JFrame {
         methodCombo = new JComboBox<>(new String[]{"Эйлер", "Эйлер-Коши (РК2)", "Рунге-Кутта 3 (Гейне)", "Рунге-Кутта 4", "Фельдберг 5(4)"});
         controlPanel.add(methodCombo);
 
-        controlPanel.add(new JLabel("y(0):"));
+        controlPanel.add(new JLabel("y(t0):"));
         y0Field = new JTextField("1.0");
         controlPanel.add(y0Field);
 
-        controlPanel.add(new JLabel("y'(0):"));
+        controlPanel.add(new JLabel("y'(t0):"));
         dy0Field = new JTextField("0.0");
         controlPanel.add(dy0Field);
 
-        controlPanel.add(new JLabel("y''(0):"));
+        controlPanel.add(new JLabel("y''(t0):"));
         d2y0Field = new JTextField("0.0");
         controlPanel.add(d2y0Field);
 
@@ -162,9 +162,12 @@ public class RKProgram extends JFrame {
             y0Field.setText("1.0");
             dy0Field.setText("0.0");
             d2y0Field.setText("0.0");
+            t0Field.setText("0.0");
+            tEndField.setText("1.0");
             y0Field.setEditable(false);
             dy0Field.setEditable(false);
             d2y0Field.setEditable(false);
+            t0Field.setEditable(false);
         } else { // Задача 2
             y0Field.setText("2.0");
             dy0Field.setText("5.0");
@@ -174,6 +177,7 @@ public class RKProgram extends JFrame {
             y0Field.setEditable(true);
             dy0Field.setEditable(true);
             d2y0Field.setEditable(true);
+            t0Field.setEditable(true);
         }
     }
 
@@ -425,10 +429,10 @@ public class RKProgram extends JFrame {
                         double errorDY = Math.abs(point[2] - exact[1]);
                         double errorD2Y = Math.abs(point[3] - exact[2]);
 
-                        resultsText.append(String.format("%-8.3f %-12.8f %-12.6f %-12.6f %-12.8f %-12.6f %-12.6f\n",
+                        resultsText.append(String.format("%-8.5f %-12.8f %-12.6f %-12.6f %-12.8f %-12.6f %-12.6f\n",
                                 point[0], point[1], point[2], point[3], errorY, errorDY, errorD2Y));
                     } else {
-                        resultsText.append(String.format("%-8.3f %-12.8f %-12.6f %-12.6f\n",
+                        resultsText.append(String.format("%-8.5f %-12.8f %-12.6f %-12.6f\n",
                                 point[0], point[1], point[2], point[3]));
                     }
                 }
